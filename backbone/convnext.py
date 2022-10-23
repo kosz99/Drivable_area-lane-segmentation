@@ -15,8 +15,8 @@ class ConvNext(nn.Module):
         
         self.depth_channels = [96, 192, 384, 768]
 
-        del self.model.avgpool
-        del self.model.fc
+        #del self.model.avgpool
+        #del self.model.fc
     
     def forward(self, x):
         p1 = self.model.features[:2](x) #feature map shape: Batch_size x 96 x input_H / 4 x input_W / 4

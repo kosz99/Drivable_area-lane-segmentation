@@ -6,7 +6,7 @@ import torch.nn as nn
 
 
 class RegNet(nn.Module):
-    def __init__(self, pretrained = True):
+    def __init__(self, pretrained = False):
         super().__init__()
         if pretrained == True:
             self.model = torchvision.models.regnet_y_1_6gf(weights='IMAGENET1K_V2')

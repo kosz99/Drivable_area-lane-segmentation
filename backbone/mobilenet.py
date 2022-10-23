@@ -5,7 +5,7 @@ import torchvision
 # Mobilenet paper: https://arxiv.org/pdf/1905.02244.pdf
 
 class Mobilenet_large(nn.Module):
-    def __init__(self, pretrained = True):
+    def __init__(self, pretrained = False):
         super().__init__()
 
         if pretrained == True:
@@ -17,7 +17,7 @@ class Mobilenet_large(nn.Module):
         self.depth_channels = [16, 24, 40, 112, 960]
 
         del self.model.avgpool
-        del self.model.fc
+        del self.model.classifier
 
     def forward(self, x):
         p1 = self.model.features[:2] #feature map shape: Batch_size x 16 x input_H / 2 x input_W / 2
@@ -31,7 +31,7 @@ class Mobilenet_large(nn.Module):
 
 
 class Mobilenet_small(nn.Module):
-    def __init__(self, pretrained = True):
+    def __init__(self, pretrained = False):
         super().__init__()
         if pretrained == True:
             self.model = torchvision.models.mobilenet_v3_large(weights='IMAGENET1K_V2')
@@ -40,8 +40,8 @@ class Mobilenet_small(nn.Module):
         
         self.depth_channels = [16, 16, 24, 48, 576]
 
-        del self.model.avgpool
-        del self.model.fc
+        #del self.model.avgpool
+        #del self.model.fc
 
     def forward(self, x):
         p1 = self.model.features[0] #feature map shape: Batch_size x 16 x input_H / 2 x input_W / 2
